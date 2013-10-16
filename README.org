@@ -1,0 +1,10 @@
+* TWLB -- Thu Web Learning Backup
+This is a repo for backup of web learning of Tsinghua University. I could still
+have access to the web learning in the first year after I graduated, which
+means, the deadline of this project is still more than half a year away:).
+
+Since I'm not sure that I would have enough time working on this project, I set
+up this repo to remind and motivate myself.
+
+I plan to finish this project using Ruby, although I already have some code
+written in Python.
