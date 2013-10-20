@@ -28,13 +28,24 @@ class WebLearning
   end
   def get_course_list
     @agent.get('http://learn.tsinghua.edu.cn/MultiLanguage/lesson/student/MyCourse.jsp?typepage=2') do |courses_page|
-      (courses_page.links.find_all {|link| link.attributes['target'] == '_blank'}).map(&:to_s).map(&:strip).each do |link|
-        puts link
+      courses_links = courses_page.links.find_all do |link|
+        link.attributes['target'] == '_blank'
       end
+      return courses_links.map { |link| Course.new(link.to_s.strip, link.attributes['href']) }
     end
   end
 end
 
+class Course
+  @@instance_id = 0
+  def initialize(name, url)
+    @course_id = @@instance_id
+    @@instance_id += 1
+    @course_name, @course_url = name, url    
+  end
+  attr_accessor :course_id, :course_name, :course_url
+end
+
 wl = WebLearning.new('config.yaml')
 wl.login()
-wl.get_course_list()
+puts wl.get_course_list().inspect
